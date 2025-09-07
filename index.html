@@ -4,30 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タブ付きウェブサイト</title>
+    <title>タブ付き検索機能</title>
     <style>
         body { font-family: Arial, sans-serif; }
-        .tab {
-            display: inline-block;
-            padding: 10px;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            border: 1px solid #ccc;
-            margin-right: 5px;
-        }
-        .tab-content {
-            display: none;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: -1px;
-        }
-        .active {
-            background-color: #fff;
-            border-bottom: 1px solid #fff;
-        }
+        .tab { display: inline-block; padding: 10px; cursor: pointer; background-color: #f1f1f1; border: 1px solid #ccc; margin-right: 5px; }
+        .tab-content { display: none; border: 1px solid #ccc; padding: 10px; margin-top: -1px; }
+        .active { background-color: #fff; border-bottom: 1px solid #fff; }
+        #searchBox { margin-bottom: 10px; }
     </style>
 </head>
 <body>
+
+<input type="text" id="searchBox" placeholder="検索...">
 
 <div id="tabs">
     <div class="tab active" onclick="openTab(event, 'tab1')">タブ1</div>
@@ -68,6 +56,15 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+    document.getElementById('searchBox').addEventListener('input', function() {
+        var filter = this.value.toLowerCase();
+        var tabs = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabs.length; i++) {
+            var content = tabs[i].innerText.toLowerCase();
+            tabs[i].style.display = content.includes(filter) ? 'block' : 'none';
+        }
+    });
 </script>
 
 </body>
