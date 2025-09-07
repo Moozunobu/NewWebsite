@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タブ付きウェブサイト</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .tab {
+            display: inline-block;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+        }
+        .tab-content {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: -1px;
+        }
+        .active {
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div id="tabs">
+    <div class="tab active" onclick="openTab(event, 'tab1')">タブ1</div>
+    <div class="tab" onclick="openTab(event, 'tab2')">タブ2</div>
+    <div class="tab" onclick="openTab(event, 'tab3')">タブ3</div>
+</div>
+
+<div id="tab1" class="tab-content" style="display: block;">
+    <h2>タブ1の内容</h2>
+    <p>ここにタブ1の内容が表示されます。</p>
+</div>
+<div id="tab2" class="tab-content">
+    <h2>タブ2の内容</h2>
+    <p>ここにタブ2の内容が表示されます。</p>
+</div>
+<div id="tab3" class="tab-content">
+    <h2>タブ3の内容</h2>
+    <p>ここにタブ3の内容が表示されます。</p>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        // タブコンテンツを非表示にする
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // タブのアクティブ状態を解除する
+        tablinks = document.getElementsByClassName("tab");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // 選択されたタブを表示し、アクティブ状態にする
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
